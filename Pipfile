@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 Flask = '==1.0.2'
+transbank-sdk-python = {editable = true, path = "./../transbank-sdk-python"}
 
 [scripts]
-serve = "flask run"
+serve = "env FLASK_ENV=development flask run"
+
+[dev-packages]
+pylint = "*"
