@@ -2,7 +2,7 @@ function showLoadingImage() {
     var html = document.getElementById("qr");
     html.innerHTML = "";
     var loading = new Image(200, 200);
-    loading.src = "./images/loading.gif";
+    loading.src = "./static/images/loading.gif";
     html.appendChild(loading);
 }
 

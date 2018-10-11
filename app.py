@@ -28,5 +28,12 @@ def transaction():
 
 @app.route('/api/commit', methods=['GET'])
 def callback():
-    response = Transaction.commit(request.args.get('occ'), request.args.get('externalUniqueNumber'))
-    return response.transaction_desc
+    status = request.args.get('status')
+    occ = request.args.get('occ')
+    external_unique_number = request.args.get('externalUniqueNumber')
+
+    if (status != "PRE_AUTHORIZED"):
+        return render_template('commit-error.html', occ=occ, external_unique_number=external_unique_number, status=status)
+
+    response = Transaction.commit(occ, external_unique_number)
+    return render_template('commit.html', response=response, external_unique_number=external_unique_number)
