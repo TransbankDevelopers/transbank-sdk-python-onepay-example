@@ -10,7 +10,7 @@ function doQrDirecto() {
     showLoadingImage();
     $.ajax({
         type: "POST",
-        url: "/api/transaction",
+        url: "/transaction/create",
         async: true,
         success: function(data) {
             // convert json to object
@@ -29,7 +29,7 @@ function doQrDirecto() {
                         occ: occ,
                         externalUniqueNumber: externalUniqueNumber
                     };
-                    sendGetRedirect("/api/commit", params);
+                    sendGetRedirect("/transaction/commit", params);
                 },
                 canceled: function () {
                     // callback rejected by user
@@ -64,9 +64,9 @@ function sendGetRedirect (destination, params) {
 
 function doCheckout() {
     var options = {
-        endpoint: '/api/transaction',
+        endpoint: '/transaction/create',
         commerceLogo: 'https://cdn.rawgit.com/TransbankDevelopers/transbank-sdk-php-onepay-example/014ea5c2/public/images/icons/logo-01.png',
-        callbackUrl: '/api/commit'
+        callbackUrl: '/transaction/commit'
     };
 
     Onepay.checkout(options);

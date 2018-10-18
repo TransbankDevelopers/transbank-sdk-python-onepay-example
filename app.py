@@ -8,13 +8,13 @@ app = Flask(__name__)
 onepay.api_key = "dKVhq1WGt_XapIYirTXNyUKoWTDFfxaEV63-O5jcsdw"
 onepay.shared_secret = "?XW#WOLG##FBAGEAYSNQ5APD#JF@$AYZ"
 onepay.integration_type = onepay.IntegrationType.TEST
-onepay.callback_url = "http://localhost:5000/api/commit"
+onepay.callback_url = "http://localhost:5000/transaction/commit"
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/api/transaction', methods=['GET', 'POST'])
+@app.route('/transaction/create', methods=['GET', 'POST'])
 def transaction():
     shopping_cart = ShoppingCart()
     shopping_cart.add(Item("Fresh Strawberries", 1, 36000))
@@ -26,7 +26,7 @@ def transaction():
     
     return jsonify(response)
 
-@app.route('/api/commit', methods=['GET'])
+@app.route('/transaction/commit', methods=['GET'])
 def callback():
     status = request.args.get('status')
     occ = request.args.get('occ')

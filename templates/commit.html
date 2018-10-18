@@ -49,7 +49,7 @@
     <tr>
         <td>Anulación</td>
         <td>
-            <a href='/api/refund/?amount={{response.amount | urlencode}}&occ={{response.occ | urlencode}}&externalUniqueNumber={{external_unique_number | urlencode}}&authorizationCode={{response.authorization_code | urlencode}}'
+            <a href='/transaction/refund?amount={{response.amount | urlencode}}&occ={{response.occ | urlencode}}&externalUniqueNumber={{external_unique_number | urlencode}}&authorizationCode={{response.authorization_code | urlencode}}'
                             >Anular esta compra</a>
         </td>
     </tr>
