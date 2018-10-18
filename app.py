@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 from transbank import onepay
 from transbank.onepay.cart import ShoppingCart, Item
 from transbank.onepay.transaction import Transaction, Channel
+from transbank.onepay.refund import Refund
 
 app = Flask(__name__)
 
@@ -37,3 +38,13 @@ def callback():
 
     response = Transaction.commit(occ, external_unique_number)
     return render_template('commit.html', response=response, external_unique_number=external_unique_number)
+
+@app.route('/transaction/refund', methods=['GET'])
+def refund():
+    amount = request.args.get('amount')
+    occ = request.args.get('occ')
+    external_unique_number = request.args.get('externalUniqueNumber')
+    authorization_code = request.args.get('authorizationCode')
+
+    response = Refund.create(amount, occ, external_unique_number, authorization_code)
+    return render_template('refund.html', response=response)
