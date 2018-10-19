@@ -6,22 +6,21 @@ from transbank.onepay.refund import Refund
 
 app = Flask(__name__)
 
-onepay.api_key = "dKVhq1WGt_XapIYirTXNyUKoWTDFfxaEV63-O5jcsdw"
-onepay.shared_secret = "?XW#WOLG##FBAGEAYSNQ5APD#JF@$AYZ"
-onepay.integration_type = onepay.IntegrationType.TEST
-onepay.callback_url = "http://localhost:5000/transaction/commit"
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/transaction/create', methods=['GET', 'POST'])
 def transaction():
+    onepay.callback_url = request.url_root + "transaction/commit"
+
     shopping_cart = ShoppingCart()
     shopping_cart.add(Item("Fresh Strawberries", 1, 36000))
     shopping_cart.add(Item("Lightweight Jacket", 1, 16000))
     
-    result = Transaction.create(shopping_cart, Channel(request.form["channel"]))
+    channel = Channel(request.form.get("channel")) if request.form.get("channel") else None
+
+    result = Transaction.create(shopping_cart, channel)
     
     response = {"occ": result.occ, "ott": result.ott, "externalUniqueNumber": result.external_unique_number, "qrCodeAsBase64": result.qr_code_as_base64, "issuedAt": result.issued_at, "amount": shopping_cart.total}
     
@@ -33,7 +32,7 @@ def callback():
     occ = request.args.get('occ')
     external_unique_number = request.args.get('externalUniqueNumber')
 
-    if (status != "PRE_AUTHORIZED"):
+    if (status and status != "PRE_AUTHORIZED"):
         return render_template('commit-error.html', occ=occ, external_unique_number=external_unique_number, status=status)
 
     response = Transaction.commit(occ, external_unique_number)
