@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, jsonify, request
 from transbank import onepay
 from transbank.onepay.cart import ShoppingCart, Item
@@ -47,3 +49,8 @@ def refund():
 
     response = Refund.create(amount, occ, external_unique_number, authorization_code)
     return render_template('refund.html', response=response)
+
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
