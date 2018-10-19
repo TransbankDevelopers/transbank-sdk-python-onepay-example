@@ -6,11 +6,6 @@ from transbank.onepay.refund import Refund
 
 app = Flask(__name__)
 
-onepay.api_key = "dKVhq1WGt_XapIYirTXNyUKoWTDFfxaEV63-O5jcsdw"
-onepay.shared_secret = "?XW#WOLG##FBAGEAYSNQ5APD#JF@$AYZ"
-onepay.integration_type = onepay.IntegrationType.TEST
-onepay.callback_url = "http://localhost:5000/transaction/commit"
-
 @app.route('/')
 def index():
     return render_template('index.html')
