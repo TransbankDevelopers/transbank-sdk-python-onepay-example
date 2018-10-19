@@ -8,7 +8,7 @@ Flask = '==1.0.2'
 transbank-sdk-python = {editable = true, ref = "master", git = "https://github.com/TransbankDevelopers/transbank-sdk-python.git"}
 
 [scripts]
-serve = "env FLASK_ENV=development flask run"
+serve = "python app.py"
 
 [dev-packages]
 pylint = "*"
