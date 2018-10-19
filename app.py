@@ -12,6 +12,8 @@ def index():
 
 @app.route('/transaction/create', methods=['GET', 'POST'])
 def transaction():
+    onepay.callback_url = request.url_root + "transaction/commit"
+
     shopping_cart = ShoppingCart()
     shopping_cart.add(Item("Fresh Strawberries", 1, 36000))
     shopping_cart.add(Item("Lightweight Jacket", 1, 16000))
