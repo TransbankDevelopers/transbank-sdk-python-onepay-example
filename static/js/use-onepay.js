@@ -14,7 +14,7 @@ function doQrDirecto() {
         async: true,
         success: function(data) {
             // convert json to object
-            var transaction = JSON.parse(data);
+            var transaction = data;
             transaction["paymentStatusHandler"] = {
                 ottAssigned: function () {
                     // callback transacción asinada
