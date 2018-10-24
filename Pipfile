@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 Flask = '==1.0.2'
-transbank-sdk-python = {editable = true, ref = "master", git = "https://github.com/TransbankDevelopers/transbank-sdk-python.git"}
+transbank-sdk = '==1.0.0'
 
 [scripts]
 serve = "python app.py"
