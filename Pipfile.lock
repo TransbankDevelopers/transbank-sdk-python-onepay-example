@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74cba0e5b960906d0052927c655e778efab9e2bab91ac70d9bb8842d6748c9bc"
+            "sha256": "b7367512f7141e1421b257dd10cafb0def6c82b921938b6ea29a3b671fc37491"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -86,10 +86,12 @@
             ],
             "version": "==2.19.1"
         },
-        "transbank-sdk-python": {
-            "editable": true,
-            "git": "https://github.com/TransbankDevelopers/transbank-sdk-python.git",
-            "ref": "4e0b005ad0a36eeff8320cb57a7d295b48c5404d"
+        "transbank-sdk": {
+            "hashes": [
+                "sha256:ad28bbaffff7750968250c8b6cb7e234901a0de1320e5aca6ea358f49a628b6a"
+            ],
+            "index": "pypi",
+            "version": "==1.0.0"
         },
         "urllib3": {
             "hashes": [
